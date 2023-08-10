@@ -75,6 +75,7 @@ class Visualizer():
         self.port = opt.display_port
         self.use_wandb = opt.use_wandb
         self.wandb_project_name = opt.wandb_project_name
+        self.current_epoch = 0
         self.saved = False
         if self.display_id > 0:  # connect to a visdom server given <display_port> and <display_server>
             import visdom
