@@ -57,7 +57,8 @@ class QSModel(BaseModel):
         self.netG = networks.define_G(opt.input_nc, opt.output_nc, opt.ngf, opt.netG, opt.normG, not opt.no_dropout, opt.init_type, opt.init_gain, opt.no_antialias, opt.no_antialias_up, self.gpu_ids, opt)
         self.netF = networks.define_F(opt.input_nc, opt.netF, opt.normG, not opt.no_dropout, opt.init_type, opt.init_gain, opt.no_antialias, self.gpu_ids, opt)
 
-        feat_dummy = self.netG(torch.zeros(opt.batch_size, 3, opt.crop_size, opt.crop_size), self.nce_layers, encode_only=True)
+        input_dummy = torch.zeros(opt.batch_size, 3, opt.crop_size, opt.crop_size).to(self.gpu_ids[0])
+        feat_dummy = self.netG(input_dummy, self.nce_layers, encode_only=True)
         self.netF(feat_dummy, self.opt.num_patches, None, None)
 
         if self.isTrain:
