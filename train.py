@@ -12,6 +12,7 @@ if __name__ == '__main__':
     dataset_size = len(dataset)    # get the number of images in the dataset.
 
     model = create_model(opt)      # create a model given opt.model and other options
+    model.setup(opt)
     print('The number of training images = %d' % dataset_size)
 
     visualizer = Visualizer(opt)   # create a visualizer that display/save images and plots
